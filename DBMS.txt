@@ -1,0 +1,382 @@
+DDL
+DML
+TCL
+
+-commit; -> to save the changes
+-rollback; -> to undo the changes
+   - rollback to savepoint;
+-savepoint; -> creates the point to group the transactions in which to rollback
+
+
+DCL - Data Control language
+
+Grant
+Revoke
+
+-grant will give permission and assign privileges/restrict the access the DB for different users
+
+-revoke will remove the privileges and permissions assigned for different users;
+  
+
+INSERT INTO student(sid, age,name,marks)VALUES (127,21,'ssss',77) ;
+INSERT INTO INTO student(sid, age,name,marks) VALUES (128,21,'rrr',76) ;
+INSERT INTO INTO student(sid, age,name,marks)VALUES (129,21,'ttt',78) ;
+
+
+
+
+
+
+ create table employees
+    (employee_id int primary key,
+   First_name varchar2(20) not null,
+    Last_name varchar2(20) not null,
+    salary numeric(12,2) not null,
+   commission_pct numeric(10,2),
+   department_id int ,
+  email varchar2(30),
+  phone_number numeric(12),
+   hire_date date,
+  constraint fk_department
+  FOREIGN KEY(department_id)
+  REFERENCES DEPARTMENTS(DEPARTMENT_ID)
+   );
+
+
+CREATE TABLE JOB_GRADES
+(GRADE_level char(3),
+ Lowest_sal numeric(10,2),
+highest_sal numeric(10,2));
+
+Insert all into departments (Department_id,department_name,
+manager_id,location_id) values (10,'Administration',200,1700)
+into departments (Department_id,department_name,
+manager_id,location_id) values (20,'Marketing',201,1800)
+into departments (Department_id,department_name,
+manager_id,location_id) values (50,'Shipping',124,1500)
+into departments (Department_id,department_name,
+manager_id,location_id) values (60,'IT',103,1400)
+into departments (Department_id,department_name,
+manager_id,location_id) values (80,'Sales',149,2500)
+into departments (Department_id,department_name,
+manager_id,location_id) values (90,'Executive',100,1700)
+into departments (Department_id,department_name,
+manager_id,location_id) values (110,'Accounting',205,1700)
+into departments (Department_id,department_name,
+manager_id,location_id) values (190,'Contracting',0,1700)
+Select 1 from dual;
+
+
+Insert all into job_grades (GRADE_level,Lowest_sal,highest_sal)
+values ('A',1000,2999)
+into job_grades (GRADE_level,Lowest_sal,highest_sal)
+values ('B',3000,5999)
+into job_grades (GRADE_level,Lowest_sal,highest_sal)
+values ('C',6000,9999)
+into job_grades (GRADE_level,Lowest_sal,highest_sal)
+values ('D',10000,14999)
+into job_grades (GRADE_level,Lowest_sal,highest_sal)
+values ('E',15000,24999)
+into job_grades (GRADE_level,Lowest_sal,highest_sal)
+values ('F',25000,40000)
+Select 1 from dual;
+
+
+Insert all into EMPLOYEES(EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(100,'Steven','King',24000,null,90,'SKING',5551234567,'17-JUN-87')
+ into EMPLOYEES (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(101,'Neena','Kochhar',17000,null,90,'NKOCHHAR',5551234568,'21-SEP-89')
+into EMPLOYEES (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(102,'Lex','De Haan',17000,null,90,'LDEHAAN',5551234569,'13-JAN-93')
+into EMPLOYEES  (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(103,'Alexander','Hunold',9000,null,60,'AHUNOLD',5551234567,'03-JaN-90')
+into EMPLOYEES (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(104,'Bruce','Ernst',6000,null,60,'BERNST',5904234568,'21-MAY-91')
+into EMPLOYEES (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(107,'Diana','Lorentz',4200,null,60,'DLORENTZ',5904235567,'07-FEB-99')
+into EMPLOYEES (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(124,'Kevin','Mourgos',5800,null,50,'KMOURGOS',6501235234,'16-NOV-99')
+into EMPLOYEES (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(141,'Trenna','Rajs',3500,null,50,'TRAJS',6501218009,'17-OCT-95')
+into EMPLOYEES (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(142,'Curtis','Davies',3100,null,50,'CDAVIES',6501212994,'29-JAN-97')
+into EMPLOYEES (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(143,'Randall','Matos',2600,null,50,'RMATOS',6501212874,'15-MAR-98')
+Select 1 from dual;
+
+
+
+
+
+
+
+
+
+
+
+
+
+into employees(EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(103,'Alexander','Hunold',9000,null,60,'AHUNOLD',5551234567,'03-JaN-90')
+into EMPLOYEES (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(104,'Bruce','Ernst',6000,null,60,'BERNST',5904234568,'21-MAY-91')
+into EMPLOYEES (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(107,'Diana','Lorentz',4200,null,60,'DLORENTZ',5904235567,'07-FEB-99')
+into EMPLOYEES (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(124,'Kevin','Mourgos',5800,null,50,'KMOURGOS',6501235234,'16-NOV-99')
+into EMPLOYEES (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(141,'Trenna','Rajs',3500,null,50,'TRAJS',6501218009,'17-OCT-95')
+into EMPLOYEES (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(142,'Curtis','Davies',3100,null,50,'CDAVIES',6501212994,'29-JAN-97')
+into EMPLOYEES (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(143,'Randall','Matos',2600,null,50,'RMATOS',6501212874,'15-MAR-98')
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQL> grant session to LTI;
+grant session to LTI
+      *
+ERROR at line 1:
+ORA-01917: user or role 'SESSION' does not exist
+
+
+SQL> grant all to LTI;
+grant all to LTI
+      *
+ERROR at line 1:
+ORA-01917: user or role 'ALL' does not exist
+
+
+SQL> grant create session to LTI;
+
+Grant succeeded.
+
+SQL> grant create table to LTI;
+
+Grant succeeded.
+
+SQL> disconnect
+Disconnected from Oracle Database 18c Express Edition Release 18.0.0.0.0 - Production
+Version 18.4.0.0.0
+SQL> connect
+Enter user-name: LTI
+Enter password:
+Connected.
+SQL> create table example(i int);
+
+Table created.
+
+SQL> disconnect
+Disconnected from Oracle Database 18c Express Edition Release 18.0.0.0.0 - Production
+Version 18.4.0.0.0
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL> grant insert on LTI.example to LTI
+  2  ;
+
+Grant succeeded.
+
+SQL> disconnect
+Disconnected from Oracle Database 18c Express Edition Release 18.0.0.0.0 - Production
+Version 18.4.0.0.0
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL> insert into example values(13);
+insert into example values(13)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> disconnect
+Disconnected from Oracle Database 18c Express Edition Release 18.0.0.0.0 - Production
+Version 18.4.0.0.0
+SQL> connect
+Enter user-name: LTI
+Enter password:
+Connected.
+SQL> insert into example values(13);
+insert into example values(13)
+            *
+ERROR at line 1:
+ORA-01950: no privileges on tablespace 'USERS'
+
+
+SQL> disconnect
+Disconnected from Oracle Database 18c Express Edition Release 18.0.0.0.0 - Production
+Version 18.4.0.0.0
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL> create tablespace tbs1 datafile 'tbs1_data.dbf' size 1m;
+
+Tablespace created.
+
+SQL> select tablespace_name,file_name,bytes from dba_data_files;
+
+TABLESPACE_NAME
+------------------------------
+FILE_NAME
+--------------------------------------------------------------------------------
+     BYTES
+----------
+SYSTEM
+C:\APP\171470\PRODUCT\18.0.0\ORADATA\XE\SYSTEM01.DBF
+ 880803840
+
+SYSAUX
+C:\APP\171470\PRODUCT\18.0.0\ORADATA\XE\SYSAUX01.DBF
+ 524288000
+
+TABLESPACE_NAME
+------------------------------
+FILE_NAME
+--------------------------------------------------------------------------------
+     BYTES
+----------
+
+UNDOTBS1
+C:\APP\171470\PRODUCT\18.0.0\ORADATA\XE\UNDOTBS01.DBF
+  68157440
+
+USERS
+C:\APP\171470\PRODUCT\18.0.0\ORADATA\XE\USERS01.DBF
+
+TABLESPACE_NAME
+------------------------------
+FILE_NAME
+--------------------------------------------------------------------------------
+     BYTES
+----------
+   5242880
+
+TBS1
+C:\APP\171470\PRODUCT\18.0.0\DBHOMEXE\DATABASE\TBS1_DATA.DBF
+   1048576
+
+
+SQL> drop table example;
+drop table example
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> disconnect
+Disconnected from Oracle Database 18c Express Edition Release 18.0.0.0.0 - Production
+Version 18.4.0.0.0
+SQL> connect
+Enter user-name: LTI
+Enter password:
+Connected.
+SQL> drop table example;
+
+Table dropped.
+
+SQL> create table example(i int) tablespace tbs1;
+
+Table created.
+
+SQL> insert into example values (13);
+insert into example values (13)
+            *
+ERROR at line 1:
+ORA-01950: no privileges on tablespace 'TBS1'
+
+
+SQL> GRANT UNLIMITED TABLESPACE TO LTI;
+GRANT UNLIMITED TABLESPACE TO LTI
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+SQL> disconnect
+Disconnected from Oracle Database 18c Express Edition Release 18.0.0.0.0 - Production
+Version 18.4.0.0.0
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL> GRANT UNLIMITED TABLESPACE TO LTI;
+
+Grant succeeded.
+
+SQL> disconnect
+Disconnected from Oracle Database 18c Express Edition Release 18.0.0.0.0 - Production
+Version 18.4.0.0.0
+SQL> connect
+Enter user-name: LTI
+Enter password:
+Connected.
+SQL> insert into example values (13);
+
+1 row created.
+
+SQL> create table example(i int) tablespace tbs1;
+create table example(i int) tablespace tbs1
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> disconnect
+Disconnected from Oracle Database 18c Express Edition Release 18.0.0.0.0 - Production
+Version 18.4.0.0.0
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
