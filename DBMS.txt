@@ -359,21 +359,608 @@ SQL> connect
 Enter user-name: system
 Enter password:
 Connected.
+SQL>/
+
+
+
+
+
+
+
+Insert into EMPLOYEES(EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(156,'Marks','Zuckberg',240000,500,90,'MZUCK',5551234760,'17-JUN-92')
+
+
+Insert into EMPLOYEES(EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(176,'Bill','Gates',240000,500,90,'BGATES',5551234770,'17-JUN-92')
+
+
+Insert into EMPLOYEES(EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(177,'Asokan','Pichai',241500,500,90,'PASOKAN',5551234766,'17-JUN-92')
+
+
+
+Joins
+
+used for combining more than one column from two different tables based on the values of the related columns
+
+Like 
+primary key  columns of the first table and foreign key in the second table.
+
+
+oracle supports
+
+inner join
+right join
+left join
+full outer join
+cross join
+equi join
+
+SQL> create table one(id int,name varchar2(20));
+
+Table created.
+
+SQL> create table two(id int,name varchar2(20));
+
+Table created.
+
+SQL> insert into one values(123,'rama');
+
+1 row created.
+
+SQL> insert into one values(124,'ramana');
+
+1 row created.
+
+SQL> insert into one values(125,'raman');
+
+1 row created.
+
+SQL> insert into one values(126,'ram');
+
+1 row created.
+
+SQL> select * from one;
+
+        ID NAME
+---------- --------------------
+       123 rama
+       124 ramana
+       125 raman
+       126 ram
+
+SQL> insert into two values(126,'ram');
+
+1 row created.
+
+SQL> insert into two values(125,'raman');
+
+1 row created.
+
+SQL> insert into two values(124,'ramana');
+
+1 row created.
+
+SQL> insert into two values(141,'raja');
+
+1 row created.
+
+SQL> insert into two values(143,'raja rao');
+
+1 row created.
+
+SQL> select * from two;
+
+        ID NAME
+---------- --------------------
+       126 ram
+       125 raman
+       124 ramana
+       141 raja
+       143 raja rao
+
+SQL> select id,name from one innerjoin two;
+select id,name from one innerjoin two
+                                  *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select id,name from one innerjoin two on id = id;
+select id,name from one innerjoin two on id = id
+                                  *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select o.id,o.name,t.id,t.name from one o innerjoin two t on o.id = t.id;
+select o.id,o.name,t.id,t.name from one o innerjoin two t on o.id = t.id
+                                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select o.id,o.name,t.id,t.name from one o inner join two t on o.id = t.id;
+
+        ID NAME                         ID NAME
+---------- -------------------- ---------- --------------------
+       126 ram                         126 ram
+       125 raman                       125 raman
+       124 ramana                      124 ramana
+
+SQL> select o.id,o.name,t.id,t.name from one o left join two t on o.id = t.id;
+
+        ID NAME                         ID NAME
+---------- -------------------- ---------- --------------------
+       126 ram                         126 ram
+       125 raman                       125 raman
+       124 ramana                      124 ramana
+       123 rama
+
+SQL> select o.id,o.name,t.id,t.name from one o right join two t on o.id = t.id;
+
+        ID NAME                         ID NAME
+---------- -------------------- ---------- --------------------
+       124 ramana                      124 ramana
+       125 raman                       125 raman
+       126 ram                         126 ram
+                                       143 raja rao
+                                       141 raja
+
+SQL> select o.id,o.name,t.id,t.name from one o left outer join two t on o.id = t.id;
+
+        ID NAME                         ID NAME
+---------- -------------------- ---------- --------------------
+       126 ram                         126 ram
+       125 raman                       125 raman
+       124 ramana                      124 ramana
+       123 rama
+
+SQL> select o.id,o.name,t.id,t.name from one o right outer join two t on o.id = t.id;
+
+        ID NAME                         ID NAME
+---------- -------------------- ---------- --------------------
+       124 ramana                      124 ramana
+       125 raman                       125 raman
+       126 ram                         126 ram
+                                       143 raja rao
+                                       141 raja
+
+SQL> select o.id,o.name,t.id,t.name from one o full outer join two t on o.id = t.id;
+
+        ID NAME                         ID NAME
+---------- -------------------- ---------- --------------------
+       126 ram                         126 ram
+       125 raman                       125 raman
+       124 ramana                      124 ramana
+                                       141 raja
+                                       143 raja rao
+       123 rama
+
+6 rows selected.
+
+SQL> select o.id,o.name,t.id,t.name from one o full join two t on o.id = t.id;
+
+        ID NAME                         ID NAME
+---------- -------------------- ---------- --------------------
+       126 ram                         126 ram
+       125 raman                       125 raman
+       124 ramana                      124 ramana
+                                       141 raja
+                                       143 raja rao
+       123 rama
+
+6 rows selected.
+
+SQL> create table locations (location_id int,city varchar2(30));
+
+Table created.
+
+SQL> create table locations (location_id int primary key,city varchar2(30));
+create table locations (location_id int primary key,city varchar2(30))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> drop table locations;
+
+Table dropped.
+
+SQL> create table locations (location_id int primary key,city varchar2(30));
+
+Table created.
+
+SQL> insert into locations values(1400,'south lake');
+
+1 row created.
+
+SQL> insert into locations values(1700,'seattle');
+
+1 row created.
+
+SQL> insert into locations values(1500,'south san francisco');
+
+1 row created.
+
+SQL> insert into locations values(1800,'toronto');
+
+1 row created.
+
+SQL> insert into locations values(2500,'oxford');
+
+1 row created.
+
+SQL> alter table employees add location_id int references locations(location_id);
+
+Table altered.
+
+
+
+
+SQL> select employee_id,department_id,location_id,city from employees natural join locations;
+
+EMPLOYEE_ID DEPARTMENT_ID LOCATION_ID CITY
+----------- ------------- ----------- ------------------------------
+        100            90        1700 seattle
+        101            90        1700 seattle
+        102            90        1700 seattle
+        103            60        1400 south lake
+        104            60        1400 south lake
+        107            60        1400 south lake
+        124            50        1500 south san francisco
+        141            50        1500 south san francisco
+        142            50        1500 south san francisco
+        143            50        1500 south san francisco
+        156            90        1700 seattle
+
+EMPLOYEE_ID DEPARTMENT_ID LOCATION_ID CITY
+----------- ------------- ----------- ------------------------------
+        176            90        1700 seattle
+        177            90        1700 seattle
+
+13 rows selected.
+
+SQL> select employee_id,department_id,location_id,city from employees natural join locations;
+
+EMPLOYEE_ID DEPARTMENT_ID LOCATION_ID CITY
+----------- ------------- ----------- ------------------------------
+        100            90        1700 seattle
+        101            90        1700 seattle
+        102            90        1700 seattle
+        103            60        1400 south lake
+        104            60        1400 south lake
+        107            60        1400 south lake
+        124            50        1500 south san francisco
+        141            50        1500 south san francisco
+        142            50        1500 south san francisco
+        143            50        1500 south san francisco
+        156            90        1700 seattle
+
+EMPLOYEE_ID DEPARTMENT_ID LOCATION_ID CITY
+----------- ------------- ----------- ------------------------------
+        176            90        1700 seattle
+        177            90        1700 seattle
+
+13 rows selected.
+
+SQL> select employee_id,last_name,department_id,location_id from employees join departments using (d
+epartment_id);
+select employee_id,last_name,department_id,location_id from employees join departments using (depart
+ment_id)
+                                           *
+ERROR at line 1:
+ORA-00918: column ambiguously defined
+
+
+SQL> select e.employee_id,e.last_name,e.department_id,e.location_id from employees e join department
+s d using (department_id);
+select e.employee_id,e.last_name,e.department_id,e.location_id from employees e join departments d u
+sing (department_id)
+                                 *
+ERROR at line 1:
+ORA-25154: column part of USING clause cannot have qualifier
+
+
+SQL> select e.employee_id,e.last_name,e.department_id,e.location_id from employees e join department
+s d using (e.department_id);
+select e.employee_id,e.last_name,e.department_id,e.location_id from employees e join departments d u
+sing (e.department_id)
+
+       *
+ERROR at line 1:
+ORA-01748: only simple column names allowed here
+
+
+SQL> select e.employee_id,e.last_name,department_id,e.location_id from employees e join departments
+d using (department_id);
+
+EMPLOYEE_ID LAST_NAME            DEPARTMENT_ID LOCATION_ID
+----------- -------------------- ------------- -----------
+        100 King                            90        1700
+        101 Kochhar                         90        1700
+        102 De Haan                         90        1700
+        103 Hunold                          60        1400
+        104 Ernst                           60        1400
+        107 Lorentz                         60        1400
+        124 Mourgos                         50        1500
+        141 Rajs                            50        1500
+        142 Davies                          50        1500
+        143 Matos                           50        1500
+        156 Zuckberg                        90        1700
+
+EMPLOYEE_ID LAST_NAME            DEPARTMENT_ID LOCATION_ID
+----------- -------------------- ------------- -----------
+        176 Gates                           90        1700
+        177 Pichai                          90        1700
+
+13 rows selected.
+
+SQL> select e.employee_id,e.last_name,department_id,e.location_id from employees e join departments
+d on e.department_id = d.department_id;
+select e.employee_id,e.last_name,department_id,e.location_id from employees e join departments d on
+e.department_id = d.department_id
+                                 *
+ERROR at line 1:
+ORA-00918: column ambiguously defined
+
+
+SQL> select e.employee_id,e.last_name,e.department_id,e.location_id from employees e join department
+s d on e.department_id = d.department_id;
+
+EMPLOYEE_ID LAST_NAME            DEPARTMENT_ID LOCATION_ID
+----------- -------------------- ------------- -----------
+        100 King                            90        1700
+        101 Kochhar                         90        1700
+        102 De Haan                         90        1700
+        103 Hunold                          60        1400
+        104 Ernst                           60        1400
+        107 Lorentz                         60        1400
+        124 Mourgos                         50        1500
+        141 Rajs                            50        1500
+        142 Davies                          50        1500
+        143 Matos                           50        1500
+        156 Zuckberg                        90        1700
+
+EMPLOYEE_ID LAST_NAME            DEPARTMENT_ID LOCATION_ID
+----------- -------------------- ------------- -----------
+        176 Gates                           90        1700
+        177 Pichai                          90        1700
+
+13 rows selected.
+
+SQL> select e.employee_id,e.last_name,e.department_id,e.location_id from employees e join department
+s d on e.department_id = d.department_id
+  2  join locations l
+  3  e.location_id = l.location_id
+  4  ;
+e.location_id = l.location_id
+*
+ERROR at line 3:
+ORA-00905: missing keyword
+
+
+SQL> select e.employee_id,e.last_name,e.department_id,e.location_id from employees e join department
+s d on e.department_id = d.department_id
+  2  join locations l
+  3  on
+  4  e.location_id = l.location_id ;
+
+EMPLOYEE_ID LAST_NAME            DEPARTMENT_ID LOCATION_ID
+----------- -------------------- ------------- -----------
+        100 King                            90        1700
+        101 Kochhar                         90        1700
+        102 De Haan                         90        1700
+        103 Hunold                          60        1400
+        104 Ernst                           60        1400
+        107 Lorentz                         60        1400
+        124 Mourgos                         50        1500
+        141 Rajs                            50        1500
+        142 Davies                          50        1500
+        143 Matos                           50        1500
+        156 Zuckberg                        90        1700
+
+EMPLOYEE_ID LAST_NAME            DEPARTMENT_ID LOCATION_ID
+----------- -------------------- ------------- -----------
+        176 Gates                           90        1700
+        177 Pichai                          90        1700
+
+13 rows selected.
+
+SQL> select e.employee_id,e.last_name,d.department_name,e.location_id from employees e join departme
+nts d on e.department_id = d.department_id
+  2  join locations l
+  3  on
+  4  e.location_id = l.location_id ;
+
+EMPLOYEE_ID LAST_NAME            DEPARTMENT_NAME                LOCATION_ID
+----------- -------------------- ------------------------------ -----------
+        124 Mourgos              Shipping                              1500
+        141 Rajs                 Shipping                              1500
+        142 Davies               Shipping                              1500
+        143 Matos                Shipping                              1500
+        103 Hunold               IT                                    1400
+        104 Ernst                IT                                    1400
+        107 Lorentz              IT                                    1400
+        100 King                 Executive                             1700
+        101 Kochhar              Executive                             1700
+        102 De Haan              Executive                             1700
+        156 Zuckberg             Executive                             1700
+
+EMPLOYEE_ID LAST_NAME            DEPARTMENT_NAME                LOCATION_ID
+----------- -------------------- ------------------------------ -----------
+        176 Gates                Executive                             1700
+        177 Pichai               Executive                             1700
+
+13 rows selected.
+
 SQL>
+SQL> select e.employee_id,e.last_name,d.department_name,e.location_id from employees e join departme
+nts d on (e.department_id = d.department_id) AND e.hire_date = '17-JUN-92';
 
 
 
+SELECT e.employee_id, e.last_name, e.department_id,
+d.department_id, d.location_id  FROM	employees e JOIN departments d
+ON	(e.department_id = d.department_id) AND e.hire_date = '17-JUN-92';
 
 
 
+SELECT e.employee_id, e.last_name, e.department_id,
+d.department_id, d.location_id  FROM	employees e JOIN departments d
+ON	(e.department_id = d.department_id) WHERE e.hire_date = '17-JUN-92';
+
+self join
+=========
+
+SQL> select employee.employee_id,employee.last_name,manager.employee_id,manager.last_name manager
+  2  from employees employee JOIN employees manager
+  3  ON
+  4  (employee.manager_id = manager.employee_id);
+
+
+SELECT e.last_name, e.salary, j.grade_level  FROM	employees e JOIN job_grades j
+ON	e.salary
+BETWEEN j.lowest_sal AND j.highest_sal;
 
 
 
+Insert into EMPLOYEES(EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY
+,COMMISSION_PCT,DEPARTMENT_ID,EMAIL,PHONE_NUMBER,HIRE_DATE) VALUES
+(172,'Donald','Trump',1500,null,null,'DTRUMP',5551234745,'17-JUN-93')
+
+
+select e.last_name,e.department_id,d.department_name from employees e left 
+outer join departments d on (e.department_id = d.department_id);
 
 
 
+SQL> select last_name , salary from employees where salary > (select salary from employees where Phone_number= (select Phone_number from employees where last_name = 'Kochhar'));
 
 
+SQL> select last_name , salary from employees where salary > (select salary from employees where
+ne_number= (select Phone_number from employees where last_name = 'Kochhar'));
+
+LAST_NAME                SALARY
+-------------------- ----------
+King                      24000
+Zuckberg                 240000
+Gates                    240000
+Pichai                   241500
+
+SQL> select last_name , salary from employees where salary In (select salary from employees wher
+partment_id = (select department_id from employees where last_name = 'Kochhar'));
+
+LAST_NAME                SALARY
+-------------------- ----------
+King                      24000
+Kochhar                   17000
+De Haan                   17000
+Zuckberg                 240000
+Gates                    240000
+Pichai                   241500
+
+6 rows selected.
+
+SQL> select last_name , salary from employees where salary > (select max(salary) from employees
+e department_id = (select department_id from employees where last_name = 'Kochhar'));
+
+no rows selected
+
+SQL> select last_name , salary from employees where salary =  (select max(salary) from employees
+re department_id = (select department_id from employees where last_name = 'Kochhar'));
+
+LAST_NAME                SALARY
+-------------------- ----------
+Pichai                   241500
+
+single row subquery
+===================
+
+SQL> select last_name,job_id,salary from employees
+  2  where job_id = (select job_id from employees where last_name = 'Matos')
+  3  AND
+  4  salary > (select salary from employees where last_name = 'Matos');
+
+
+Group function in sub query
+============================
+SQL> select last_name,job_id,salary from employees
+  2  where
+  3  salary < (select max(salary) from employees);
+
+Having clause in sub query
+==========================
+
+SQL> select department_id,MIN(salary) from employees
+  2  group by department_id having min(salary) >
+  3  (select min(salary) from employees where department_id = 50);
+
+DEPARTMENT_ID MIN(SALARY)
+------------- -----------
+           90       17000
+           60        4200
+
+
+
+ANY Operator in subquery
+=======================
+SQL> select employee_id,last_name,job_id from employees
+  2  where salary < ANY
+  3  (select salary from employees where job_id = 'AD_PRES')
+  4  AND job_id <> 'AD_PRES';
+
+ALL Operator in subquery
+========================
+SQL> select employee_id,last_name,job_id from employees
+   where salary < ALL
+  (select salary from employees where job_id = 'AD_PRES')
+  AND job_id <> 'AD_PRES';
+
+
+Write a query using set operators and order by clause?
+=====================================================
+
+views
+=====
+
+
+views are virtual tables that does not exist physically ,rather it is created to view result of join on two tables
+
+
+PROCEDURE
+=========
+
+A REUSABLE LOGICAL UNIT WRITTEN IN PLSQL
+
+THREE SECTIONS
+==============
+
+DECLARATION
+EXECUTION
+HEADER
+BODY
+EXCEPTION
+
+
+
+IN
+
+READ-ONLY ,IT'S A DEFAULT MODE FOR A VARIABLE IF YOU DON'T EXPLICITLY MENTION THE CATEGORY
+
+
+OUT
+
+WRITABLE,YOU CAN USE THIS TO RETURN THE VALUE FROM PROCEDURE TO CALLING PROCEDURE/PROGRAM
+
+
+INOUT
+
+READABLE AND WRITABLE
 
 
 
